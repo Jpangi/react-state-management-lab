@@ -88,26 +88,69 @@ const App = () => {
     },
   ]
   );
+// When you click Add on a character, this function should add the selected character’s object to the existing team state array. This is how you build your team.
+const handleAddFighter = (fighter) => {
+  if(money > fighter.price){
+     setMoney(money - fighter.price)
+  }else{
+    console.log("Not Enough Money")
+    return
+  }
+ 
+  setTeam([...team, fighter]);
+  // filters the zombie array for everything but the added team zombie
+  setZombieFighters(zombieFighters.filter((fighters) => fighters !== fighter));
+};
 
 
+const handleRemoveFighter = (fighter) => {
+  setTeam(team.filter((fighters) => fighters !== fighter));
+  setZombieFighters([...zombieFighters,fighter])
+  setMoney(money + fighter.price)
+}
 
   return (
     <>
-      <h1>Hello world!</h1>
-      <div>
-        {zombieFighters.map((zombies, index) => {
+    <main>
+      <h1>Zombie Fighters</h1>
+      <h2>Money: {money}</h2>
+      <h2>Team Strength: {team.reduce((acc,fighters)=> acc + fighters.strength,0)} </h2>
+      <h2>Team Agility: {team.reduce((acc,fighters)=> acc + fighters.agility,0)} </h2>
+      <h2>Team:</h2>
+      <div className="teamList">
+        {team.length === 0
+          ? <p>Pick some team members!</p>
+          : team.map((fighter, index) => {
+              return (
+                <li key={index}>
+                  <img src={fighter.img} />
+                  <h3>Name: {fighter.name}</h3>
+                  <p>Price: {fighter.price}</p>
+                  <p>Strength: {fighter.strength}</p>
+                  <p>Agility: {fighter.agility}</p>
+                  <button onClick={() => handleRemoveFighter(fighter)}>Remove</button>
+                </li>
+              );
+            })}
+      </div>
+</main>
+  <section>
+    <h2 className="fighterListh2">Fighters</h2>
+      <div className="fighterList">
+        {zombieFighters.map((fighter, index) => {
           return (
             <li key={index}>
-              <img src={zombies.img}/>
-              <h3>{zombies.name}</h3>
-              <p>{zombies.price}</p>
-              <p>{zombies.strength}</p>
-              <p>{zombies.agility}</p>
-              <button>Add</button>
+              <img src={fighter.img} />
+              <h3>Name: {fighter.name}</h3>
+              <p>Price: {fighter.price}</p>
+              <p>Strength: {fighter.strength}</p>
+              <p>Agility: {fighter.agility}</p>
+              <button onClick={() => handleAddFighter(fighter)}>Add</button>
             </li>
           );
         })}
       </div>
+      </section> 
     </>
   );
 };

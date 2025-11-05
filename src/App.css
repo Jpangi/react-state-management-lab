@@ -2,10 +2,36 @@
   margin: 16px;
 }
 
+body{
+  background-color: gray;
+}
+
+main{
+text-align: center;
+
+}
+.fighterList{
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.fighterListh2{
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+}
+.teamList{
+  display: flex;
+  justify-content:center ;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
 ul {
   display: flex;
-  flex-wrap: wrap;
-  
+  justify-content:center ;
+  align-items: center;
 }
 
 li {
@@ -14,5 +40,11 @@ li {
   padding: 8px;
   border: whitesmoke 3px solid;
   border-radius: 8px;
+  width: fit-content;
+  
 }
 
+p {
+  font-size: 1em;
+  font-weight: 400;
+}
